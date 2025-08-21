@@ -1,2 +1,29 @@
-# Comfyui-Qwen-image-edit-CharacterConsistency
-ComfyUI 官方的 `TextEncodeQwenImageEdit` 节点简化了提示词工程，导致角色一致性变差，这个节点只是替换回了原本的提示词工程
+# Qwen 图像编辑角色一致性增强节点
+
+## 问题背景
+
+ComfyUI 官方的 `TextEncodeQwenImageEdit` 节点简化了提示词工程，导致角色一致性变差。
+
+## 解决方案
+
+本自定义节点完全替代官方节点，增强了角色一致性：
+
+- **中英文优化模板**：专门设计的系统提示词，强调保持角色特征
+- **角色一致性优化**：保留画面主体、细节、背景等核心内容
+- **完全兼容**：输入输出与官方节点完全一致，可直接替换使用
+
+## 使用方法
+
+1. 重启 ComfyUI
+2. 搜索节点：`Text Encode Qwen Image Edit (Enhanced)`
+3. 替换原有的 `TextEncodeQwenImageEdit` 节点
+4. 选择语言：推荐选择 "Chinese" 使用优化的中文模板
+
+## 核心改进
+
+- 保留角色外貌、表情、姿态等特征
+- 强调中国古典元素（适用于古诗词内容）
+- 避免否定词，保持逻辑关系
+- 自动添加质量增强后缀
+
+独立维护，不受官方简化版本限制。
