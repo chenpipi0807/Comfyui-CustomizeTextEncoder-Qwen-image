@@ -1,5 +1,12 @@
 # Qwen 图像编辑角色一致性增强节点
 
+
+## 最新动作
+- 将系统提示词更改为可自定义的方式以增强灵活性
+
+<img width="2172" height="1614" alt="image" src="https://github.com/user-attachments/assets/221e0e7a-4c62-42f6-92e3-6a76beb00cfe" />
+
+
 ## 问题背景
 
 ComfyUI 官方的 `TextEncodeQwenImageEdit` 节点简化了提示词工程，导致角色一致性变差。
