@@ -1,8 +1,9 @@
-# Qwen 图像编辑-自定义系统提示词
+# Qwen-image/qwen-image-edit-自定义系统提示词（文本编码器）
 
 
 ## 最新动作
 - 将系统提示词更改为可自定义的方式以增强灵活性
+- 增加了对于qwen-image文生图场景的支持
 
 <img width="2172" height="1614" alt="image" src="https://github.com/user-attachments/assets/221e0e7a-4c62-42f6-92e3-6a76beb00cfe" />
 <img width="1161" height="749" alt="image" src="https://github.com/user-attachments/assets/79855c98-9149-4b55-bf80-054fa8be51f5" />
