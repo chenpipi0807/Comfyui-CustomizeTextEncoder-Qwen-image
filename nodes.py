@@ -82,11 +82,54 @@ Process: First identify all distinctive character features from the input image,
         return (conditioning, )
 
 
+class TextEncodeQwenImageT2ICustom:
+    @classmethod
+    def INPUT_TYPES(s):
+        # Default text-to-image system prompt template (official default)
+        default_t2i_template = (
+            "<|im_start|>system\n"
+            "Describe the image by detailing the color, shape, size, texture, quantity, text, "
+            "spatial relationships of the objects and background:<|im_end|>\n"
+            "<|im_start|>user\n{}<|im_end|>\n<|im_start|>assistant\n"
+        )
+
+        return {"required": {
+            "clip": ("CLIP", ),
+            "prompt": ("STRING", {"multiline": True, "dynamicPrompts": True}),
+            "system_template": ("STRING", {"multiline": True, "default": default_t2i_template}),
+        }}
+
+    RETURN_TYPES = ("CONDITIONING",)
+    FUNCTION = "encode"
+    CATEGORY = "advanced/conditioning"
+
+    def encode(self, clip, prompt, system_template):
+        # Create tokenizer dedicated to qwen-image and set custom text-only system template
+        tokenizer = QwenImageTokenizer()
+        tokenizer.llama_template = system_template
+
+        # Temporarily swap tokenizer
+        original_tokenizer = clip.tokenizer
+        clip.tokenizer = tokenizer
+
+        try:
+            # Text-to-image: no images passed
+            tokens = clip.tokenize(prompt, images=[])
+            conditioning = clip.encode_from_tokens_scheduled(tokens)
+        finally:
+            # Always restore original tokenizer
+            clip.tokenizer = original_tokenizer
+
+        return (conditioning, )
+
+
 # Node mappings for ComfyUI
 NODE_CLASS_MAPPINGS = {
     "TextEncodeQwenImageEditEnhanced": TextEncodeQwenImageEditEnhanced,
+    "TextEncodeQwenImageT2ICustom": TextEncodeQwenImageT2ICustom,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "TextEncodeQwenImageEditEnhanced": "Text Encode Qwen Image Edit (Enhanced)",
+    "TextEncodeQwenImageT2ICustom": "Text Encode Qwen Image (Qwen-only, Custom System)",
 }
